@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../politocean_common/include/PolitoceanConstants.h
+string
+-
+
+../politocean_common/include/PolitoceanExceptions.hpp
+stdexcept
+-
+
+/home/fedeb/Developer/politocean/politocean_gui/politocean_common/libs/Logger/logger.cpp
+logger.h
+/home/fedeb/Developer/politocean/politocean_gui/politocean_common/libs/Logger/logger.h
+iostream
+-
+fstream
+-
+sstream
+-
+ctime
+-
+cstring
+-
+string
+-
+PolitoceanConstants.h
+/home/fedeb/Developer/politocean/politocean_gui/politocean_common/libs/Logger/PolitoceanConstants.h
+PolitoceanExceptions.hpp
+/home/fedeb/Developer/politocean/politocean_gui/politocean_common/libs/Logger/PolitoceanExceptions.hpp
+experimental/filesystem
+-
+cstdlib
+-
+
+/home/fedeb/Developer/politocean/politocean_gui/politocean_common/libs/Logger/logger.h
+map
+-
+

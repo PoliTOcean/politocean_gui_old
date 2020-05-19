@@ -1,0 +1,1 @@
+/usr/bin/g++ -fPIC -g  -shared -Wl,-soname,libMqttClient.so -o libMqttClient.so CMakeFiles/MqttClient.dir/MqttClient.cpp.o -Wl,-rpath,/home/fedeb/Developer/politocean/politocean_gui/build/politocean_common/libs/Logger: -lmosquittopp -lpthread ../Logger/liblogger.so -lstdc++fs 

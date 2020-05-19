@@ -1,0 +1,4 @@
+/home/fedeb/Developer/politocean/politocean_gui/CMakeFiles/rebuild_cache.dir
+/home/fedeb/Developer/politocean/politocean_gui/CMakeFiles/PolitoceanGui.dir
+/home/fedeb/Developer/politocean/politocean_gui/CMakeFiles/edit_cache.dir
+/home/fedeb/Developer/politocean/politocean_gui/CMakeFiles/PolitoceanGui_autogen.dir

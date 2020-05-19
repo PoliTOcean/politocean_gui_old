@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Background.qml</file>
+        <file>BackgroundForm.ui.qml</file>
+        <file>Sensor.qml</file>
+        <file>Streaming.qml</file>
+        <file>Errors.qml</file>
+        <file>Menu.qml</file>
+        <file>Cad.qml</file>
+        <file>assets/img.jpg</file>
+        <file>assets/pressure.png</file>
+        <file>assets/prova.jpg</file>
+        <file>assets/weather.png</file>
+    </qresource>
+</RCC>

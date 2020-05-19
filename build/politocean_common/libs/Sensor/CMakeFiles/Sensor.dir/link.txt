@@ -1,0 +1,1 @@
+/usr/bin/g++ -fPIC -g  -shared -Wl,-soname,libSensor.so -o libSensor.so CMakeFiles/Sensor.dir/Sensor.cpp.o 

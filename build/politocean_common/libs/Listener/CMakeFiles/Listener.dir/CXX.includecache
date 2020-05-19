@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/fedeb/Developer/politocean/politocean_gui/politocean_common/libs/Listener/Listener.cpp
+Listener.hpp
+/home/fedeb/Developer/politocean/politocean_gui/politocean_common/libs/Listener/Listener.hpp
+
+/home/fedeb/Developer/politocean/politocean_gui/politocean_common/libs/Listener/Listener.hpp
+string
+-
+queue
+-
+exception
+-
+
