@@ -1,1 +1,0 @@
-/usr/bin/g++ -fPIC -g  -shared -Wl,-soname,libComponent.so -o libComponent.so CMakeFiles/Component.dir/Component.cpp.o -Wl,-rpath,/home/fedeb/Developer/politocean/politocean_gui/build/politocean_common/libs/Logger: ../Logger/liblogger.so -lstdc++fs 

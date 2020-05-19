@@ -23,7 +23,7 @@ Rectangle {
 
     Text {
         id: info
-        text: qsTr("Cad. Mi apro/chiudo con 1")
+        text: qsTr("Cad. Mi apro/chiudo con 1 ora non più")
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.margins: 5
