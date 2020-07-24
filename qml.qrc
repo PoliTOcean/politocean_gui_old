@@ -12,5 +12,6 @@
         <file>assets/pressure.png</file>
         <file>assets/prova.jpg</file>
         <file>assets/weather.png</file>
+        <file>Menu2.qml</file>
     </qresource>
 </RCC>

@@ -36,7 +36,7 @@ add_executable(PolitoceanGui main.cpp qmlmqttclient.cpp qml.qrc)
 target_compile_definitions(PolitoceanGui
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 target_link_libraries(PolitoceanGui
-    PRIVATE Qt5::Core Qt5::Quick Qt5::Widgets Qt5::Charts Qt5::Mqtt)
+    PRIVATE Qt5::Core Qt5::Quick Qt5::Widgets Qt5::Charts Qt5::Mqtt )
 
 
 

@@ -8,21 +8,24 @@ import QtCharts 2.14
 Rectangle{
 
     id: menu
+    //Vedi position
     anchors.verticalCenter: parent.verticalCenter
     anchors.horizontalCenter: parent.horizontalCenter
-    width: parent.width/2
-    height: parent.height/3
     radius: 10
     color: Qt.rgba(32,32,32,0.3)
 
     property int maxDepth: -5
-    property alias menu_maxDepth: valueMaxDepth.text
-    property alias chartsVisibleG: chartsVisible.text
-    property alias rovVisibleG: rovVisible.text
-    property alias errorsVisibleG: errorsVisible.text
+    property alias menu_maxDepth: textvalue.valueMaxDepth
+    property alias chartsVisibleG: chartsVisibletext.text
+    property alias rovVisibleG: rovVisibletext.text
+    property alias errorsVisibleG: errorsVisibletext.text
+    //    width: 380
+    //    height: 513
 
     GridLayout {
         id: grid
+        //        width: 500
+        //        height: 300
         anchors.fill: parent
 
         rows: 5
@@ -39,42 +42,26 @@ Rectangle{
             color:"transparent"
 
             Text{
+                id: textvalue
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.margins: 5
-                text: "Current Max Depth"
+                text: "Current Max Depth: " +  maxDepth + " mt"
+                property int valueMaxDepth: maxDepth
             }
 
         }
+
+
 
         Rectangle {
 
             Layout.fillHeight: true
             Layout.fillWidth: true
-            Layout.columnSpan: 1
+            Layout.columnSpan: 2
             Layout.rowSpan: 1
             Layout.row: 0
             Layout.column: 2
-            color:"transparent"
-
-            Text{
-                id:valueMaxDepth
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.margins: 5
-                text: maxDepth
-            }
-        }
-
-
-        Rectangle {
-
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            Layout.columnSpan: 1
-            Layout.rowSpan: 1
-            Layout.row: 0
-            Layout.column: 3
             color:"transparent"
 
             TextField {
@@ -91,14 +78,32 @@ Rectangle{
                 anchors.right: parent.right
                 width: parent.width/2
                 anchors.margins: 5
-                text: "Set"
+                background: Rectangle{
+                    id: maxDepthButtonbackground
+                    border.width: 1
+                    border.color: "black"
+                    radius: 5
+                    color: "#444444"
+                }
+                contentItem: Text{
+                    id: maxDepthButtontext
+                    text: "Set"
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    color: "#bebebe"
+                }
                 onClicked: {
-                    var new_value = parseInt(maxDepthSet.text)
-                    if(new_value >= 0){
-                        addMessage("ErrMaxDepth","-1","Devi inserire un numero maggiore di 0!!!!!!!!!!!!!!!!!!!!!!!!!!!", 1)
-                    } else {
-                        maxDepth = new_value
-                    }
+                    var new_value;
+                    if(maxDepthSet.text)
+                    {new_value = parseInt(maxDepthSet.text)
+                        if(new_value >= 0 || new_value<=-100 ){
+                            addMessage("ErrMaxDepth","-1","Devi inserire un numero compreso tra 0 e -100", 1)
+                        }  else {
+                            maxDepth = new_value
+                        }}
+                    else
+                        addMessage("ErrMaxDepth","-1","Devi inserire un numero", 1)
+
                     return
                 }
             }
@@ -106,6 +111,54 @@ Rectangle{
 
 
 
+
+        Rectangle {
+            color: "transparent"
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.columnSpan: 2
+            Layout.rowSpan: 1
+            Layout.row: 1
+            Layout.column: 2
+
+
+
+            Button {
+                id: chartsVisible
+                anchors.fill: parent
+                anchors.margins: 5
+                background: Rectangle{
+                    id: chartbackgroundvisible
+                    border.width: 1
+                    border.color: "black"
+                    radius: 5
+                    color: "#444444"
+                }
+
+
+                contentItem: Text{
+                    id: chartsVisibletext
+                    text: "Charts not visible"
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    color: "#bebebe"
+                }
+
+                onClicked: {
+                    if(chartsVisibleG === "Charts not visible"){
+                        chartsVisibletext.text = "Charts visible"
+                        chartbackgroundvisible.color = "#bebebe"
+                        chartsVisibletext.color = "#444444"
+
+                    } else {
+                        chartsVisibletext.text = "Charts not visible"
+                        chartbackgroundvisible.color = "#444444"
+                        chartsVisibletext.color = "#bebebe"
+                    }
+                    return
+                }
+            }
+        }
 
         Rectangle {
             color: "transparent"
@@ -119,54 +172,36 @@ Rectangle{
 
 
             Button {
-                id: chartsVisible
-                anchors.fill: parent
-                anchors.margins: 5
-
-                palette {
-                    button: "#d1d4c9"
-                }
-                text: "Charts not visible"
-                onClicked: {
-
-                    if(chartsVisibleG === "Charts not visible"){
-                        chartsVisible.text = "Charts visible"
-                       // chartsVisible.palette = { button: "black"}
-                    } else {
-                        chartsVisible.text = "Charts not visible"
-                       // chartsVisible.palette = { button: "#d1d4c9"}
-                    }
-                    return
-                }
-            }
-        }
-
-        Rectangle {
-            color: "transparent"
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            Layout.columnSpan: 2
-            Layout.rowSpan: 1
-            Layout.row: 1
-            Layout.column: 2
-
-            Button {
                 id: rovVisible
                 anchors.fill: parent
                 anchors.margins: 5
-
-                palette {
-                    button: "#d1d4c9"
+                background: Rectangle{
+                    id: rovbackgroundvisible
+                    border.width: 1
+                    border.color: "black"
+                    radius: 5
+                    color: "#444444"
                 }
-                text: "ROV not visible"
+
+
+                contentItem: Text{
+                    id: rovVisibletext
+                    text: "ROV not visible"
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    color: "#bebebe"
+                }
+
                 onClicked: {
 
                     if(rovVisibleG === "ROV not visible"){
-                        rovVisible.text = "ROV visible"
-                        //rovVisible.palette = { button: "black"}
+                        rovVisibletext.text = "ROV visible"
+                        rovbackgroundvisible.color ="#bebebe"
+                        rovVisibletext.color = "#444444"
                     } else {
-                        rovVisible.text = "ROV not visible"
-                        //rovVisible.palette = { button: "#d1d4c9"}
+                        rovVisibletext.text = "ROV not visible"
+                        rovbackgroundvisible.color ="#444444"
+                        rovVisibletext.color = "#bebebe"
                     }
                     return
                 }
@@ -186,19 +221,30 @@ Rectangle{
                 id: errorsVisible
                 anchors.fill: parent
                 anchors.margins: 5
-
-                palette {
-                    button: "#d1d4c9"
+                background: Rectangle{
+                    id: errorsbackgroundvisible
+                    border.width: 1
+                    border.color: "black"
+                    radius: 5
+                    color: "#444444"
                 }
-                text: "Errors not visible"
+
+                contentItem: Text{
+                    id: errorsVisibletext
+                    text: "Errors not visible"
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    color: "#bebebe"
+                }
                 onClicked: {
-                    /*TODO: change button color onClicked*/
                     if(errorsVisibleG === "Errors not visible"){
-                        errorsVisible.text = "Errors visible"
-                       // errorsVisible.palette = { button: "black"}
+                        errorsVisibletext.text = "Errors visible"
+                        errorsbackgroundvisible.color ="#bebebe"
+                        errorsVisibletext.color = "#444444"
                     } else {
-                        errorsVisible.text = "Errors not visible"
-                       // errorsVisible.palette = { button: "#d1d4c9"}
+                        errorsVisibletext.text = "Errors not visible"
+                        errorsbackgroundvisible.color ="#444444"
+                        errorsVisibletext.color = "#bebebe"
                     }
                     return
                 }
@@ -206,85 +252,96 @@ Rectangle{
         }
 
 
-        Rectangle {
-            color: "transparent"
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            Layout.columnSpan: 2
-            Layout.rowSpan: 1
-            Layout.row: 2
-            Layout.column: 2
+        //        Rectangle {
+        //            color: "transparent"
+        //            Layout.fillHeight: true
+        //            Layout.fillWidth: true
+        //            Layout.columnSpan: 2
+        //            Layout.rowSpan: 1
+        //            Layout.row: 2
+        //            Layout.column: 2
 
 
 
-            Button {
-                id: mode1
-                anchors.fill: parent
-                anchors.margins: 5
+        //            Button {
+        //                id: mode1
+        //                anchors.fill: parent
+        //                anchors.margins: 5
 
-                palette {
-                    button: "#d1d4c9"
-                }
-                text: "Mode 1"
-                onClicked: {
+        //                palette {
+        //                    button: "#d1d4c9"
+        //                }
+        //                text: "Mode 1"
+        //                onClicked: {
 
-                    addMessage("Mode 1 selected", 2)
-                }
-            }
-        }
+        //                    addMessage("Mode 1 selected", 2)
+        //                }
+        //            }
+        //        }
 
-        Rectangle {
-            color: "transparent"
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            Layout.columnSpan: 2
-            Layout.rowSpan: 1
-            Layout.row: 3
-            Layout.column: 0
+        //        Rectangle {
+        //            color: "transparent"
+        //            Layout.fillHeight: true
+        //            Layout.fillWidth: true
+        //            Layout.columnSpan: 2
+        //            Layout.rowSpan: 1
+        //            Layout.row: 3
+        //            Layout.column: 0
 
-            Button {
-                id: mode2
-                anchors.fill: parent
-                anchors.margins: 5
+        //            Button {
+        //                id: mode2
+        //                anchors.fill: parent
+        //                anchors.margins: 5
 
-                palette {
-                    button: "#d1d4c9"
-                }
-                text: "Mode 2"
-                onClicked: {
+        //                palette {
+        //                    button: "#d1d4c9"
+        //                }
+        //                text: "Mode 2"
+        //                onClicked: {
 
-                    addMessage("Mode 2 selected", 1)
-                }
-            }
-        }
+        //                    addMessage("Mode 2 selected", 1)
+        //                }
+        //            }
+        //        }
 
-        Rectangle {
-            color: "transparent"
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            Layout.columnSpan: 2
-            Layout.rowSpan: 1
-            Layout.row: 3
-            Layout.column: 2
+        //        Rectangle {
+        //            color: "transparent"
+        //            Layout.fillHeight: true
+        //            Layout.fillWidth: true
+        //            Layout.columnSpan: 2
+        //            Layout.rowSpan: 1
+        //            Layout.row: 3
+        //            Layout.column: 2
 
 
 
-            Button {
-                id: mode3
-                anchors.fill: parent
-                anchors.margins: 5
+        //            Button {
+        //                id: mode3
+        //                anchors.fill: parent
+        //                anchors.margins: 5
 
-                palette {
-                    button: "#d1d4c9"
-                }
-                text: "Mode 3"
-                onClicked: {
+        //                palette {
+        //                    button: "#d1d4c9"
+        //                }
+        //                text: "Mode 3"
+        //                onClicked: {
 
-                    addMessage("Mode 3 selected", 1)
-                }
-            }
-        }
+        //                    addMessage("Mode 3 selected", 1)
+        //                }
+        //            }
+        //        }
     }
+    states: [
+        State {
+            name: "State1"
+        }
+    ]//grid
 
 
 }
+
+/*##^##
+Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+##^##*/

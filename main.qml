@@ -6,7 +6,8 @@ import MqttClient 1.0
 
 //TODO --> gestire disconnessione mqtt, valori non consoni mqtt
 
-
+import QtQuick.Scene3D 2.0
+import QtQuick3D 1.14
 
 ApplicationWindow {
     visible: true
@@ -72,11 +73,12 @@ ApplicationWindow {
 
         Sensor{
             id:sensori
-            width: parent.width*2/3 + 40
-            height: parent.height/3 + 20
+            width: parent.width*2/3 //+40
+            height: parent.height/3 //+20
+//            width: parent.width*6/8
+//            height: parent.height/4
             visibleGraficiRoot: visibleCheck()
             maxDepth: menu.maxDepth
-
             function visibleCheck(){
                 if( menu.chartsVisibleG === "Charts not visible")
                     return false
@@ -101,54 +103,89 @@ ApplicationWindow {
         }
 
 
-        Cad{
-            id:cad
+        Rectangle{
+            id:cadRoot
             width:parent.width/4
             height:parent.height/4
-            visibleCadRoot :  visibleCheck()
-
+              //  property alias visibleCadRoot: cadRoot.visible
+             // visible: false
+             anchors.left: parent.right
+                anchors.top: parent.top
+               anchors.leftMargin: 5
+               anchors.topMargin: 5
+                radius: 10
+                color:  backgroundcad()
             function visibleCheck(){
                 if( menu.rovVisibleG === "ROV not visible")
                     return false
                 else
                     return true
             }
+            function backgroundcad(){
+                if( menu.rovVisibleG === "ROV not visible")
+                {  // cadRoot.height=0
+                    cadRoot.anchors.left=parent.right
 
-
-        }
-
-        Rectangle{
-
-            id : statusMqttBox
-
-            width:parent.width/4
-            height:20
-            anchors.left: parent.left
-            anchors.top: parent.top
-            anchors.leftMargin: 5
-
-            anchors.margins: 5
-            radius: 10
-            color: Qt.rgba(32,32,32,0.3)
-
-            Text {
-                id: statusMqtt
-
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.margins: 2
-                color:  if(clientMain.state === MqttClient.Connected){
-                            return "green"
-                        } else  {
-                            return "black"
-                        }
-
-                text: "Status Mqtt connection: " + stateToString(clientMain.state)
-                enabled: clientMain.state === MqttClient.Connected
-
+                    return "transparent"
+                }
+                else{
+                      cadRoot.anchors.left=parent.left
+                    return Qt.rgba(32,32,32,0.3)}
             }
 
+            Scene3D {
+                id: scene3d
+
+                anchors.fill: parent
+                anchors.margins: 10
+                //focus: true
+                aspects: ["input", "logic"]
+                cameraAspectRatioMode: Scene3D.AutomaticAspectRatio
+//                hoverEnabled: true
+//               visible: false
+
+                Cad{
+                    id: cadElement
+
+                    //visibleCadRoot :  visibleCheck()
+                }
+            }
+
+
         }
+
+//        Rectangle{
+
+//            id : statusMqttBox
+
+//            width:parent.width/4
+//            height:20
+//            anchors.left: parent.left
+//            anchors.top: parent.top
+//            anchors.leftMargin: 5
+
+//            anchors.margins: 5
+//            radius: 10
+//            color: Qt.rgba(32,32,32,0.3)
+
+//            Text {
+//                id: statusMqtt
+
+//                anchors.horizontalCenter: parent.horizontalCenter
+//                anchors.verticalCenter: parent.verticalCenter
+//                anchors.margins: 2
+//                color:  if(clientMain.state === MqttClient.Connected){
+//                            return "green"
+//                        } else  {
+//                            return "black"
+//                        }
+
+//                text: "Status Mqtt connection: " + stateToString(clientMain.state)
+//                enabled: clientMain.state === MqttClient.Connected
+
+//            }
+
+//        }
 
 
 
@@ -252,9 +289,9 @@ ApplicationWindow {
             tempSubscriptionSensors.messageReceived.connect(checkSensorsValues)
             tempSubscriptionErrors.messageReceived.connect(checkErrorsValues)
 
-            addMessage("MqttConn",-1,"Connected!!!!!!!!!!!!!!!!!!m!!!!!!!!!!!!!!!4567890123456789012345678901234567890123456789!!!!!!!!!! to mqtt45678901234567890123456789012345678901234567894567890123456789012345678901234567890123456789",2)
+            addMessage("MqttConn",-1,"Connected to mqtt ",0)
 
-            addMessage("MqttSub",-1,"123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890",0)
+            addMessage("MqttSub",-1,"Error example-click to delete",2)
 
 
 
@@ -277,10 +314,12 @@ ApplicationWindow {
         var Press = parseFloat(values[2]);
         var Pitch = parseFloat(values[3]);
         var Roll = parseFloat(values[4]);
+        var Yaw = parseFloat(values[5]);
 
         //TODO MIN MAX
 
         sensori.addMessage(TempEx,TempIn,Press)
+        cadElement.addMessage(Pitch,Yaw,Roll)
 
     }
 
