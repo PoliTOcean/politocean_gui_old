@@ -23,11 +23,17 @@ ApplicationWindow {
 
     }
 
+//    WorkerScript{
+//        id:workersource
+//        source: ""
+//    }
+
     MqttClient {
         id: clientMain
         hostname: "localhost"
         port: portField.text
     }
+
 
     Background{
         id:background
@@ -85,6 +91,16 @@ ApplicationWindow {
                 else
                     return true
             }
+
+        }
+
+        Battery{
+            id: battery
+            width: 50//parent.width/45
+            height: 70//parent.height/12
+            color: "transparent"
+            anchors.right:  parent.right
+            anchors.bottom:  parent.bottom
 
         }
 
@@ -273,6 +289,7 @@ ApplicationWindow {
 
     property var tempSubscriptionSensors: 0
     property var tempSubscriptionErrors: 0
+    property var tempSubscriptionBattery: 0
 
     function timerTriggered(){
 
@@ -285,9 +302,11 @@ ApplicationWindow {
 
             tempSubscriptionSensors = clientMain.subscribe("Sensors")
             tempSubscriptionErrors = clientMain.subscribe("Errors")
+            tempSubscriptionBattery = clientMain.subscribe("Battery")
 
             tempSubscriptionSensors.messageReceived.connect(checkSensorsValues)
             tempSubscriptionErrors.messageReceived.connect(checkErrorsValues)
+            tempSubscriptionBattery.messageReceived.connect(checkBatteryValues)
 
             addMessage("MqttConn",-1,"Connected to mqtt ",0)
 
@@ -331,6 +350,17 @@ ApplicationWindow {
         var m = payload.split(",")
 
         errors.addErrorMessage(m[0],m[1],m[2],parseInt(m[3]))
+    }
+
+    function checkBatteryValues(payload) {
+
+       // TODO: payload message (percentage ? )
+
+        var m = payload.split(",")
+        var value=m[6]
+        console.log("Battery Test "+payload)
+
+        battery.updateBatteryStatus(value)
     }
 
 

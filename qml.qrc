@@ -14,5 +14,11 @@
         <file>assets/weather.png</file>
         <file>Menu2.qml</file>
         <file>assets/rov.obj</file>
+        <file>Battery.qml</file>
+        <file>assets/batteria/1.png</file>
+        <file>assets/batteria/2.png</file>
+        <file>assets/batteria/3.png</file>
+        <file>assets/batteria/4.png</file>
+        <file>assets/batteria/5.png</file>
     </qresource>
 </RCC>
