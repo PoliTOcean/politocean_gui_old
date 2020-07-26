@@ -13,5 +13,6 @@
         <file>assets/prova.jpg</file>
         <file>assets/weather.png</file>
         <file>Menu2.qml</file>
+        <file>assets/rov.obj</file>
     </qresource>
 </RCC>

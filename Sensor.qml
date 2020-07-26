@@ -9,6 +9,7 @@ Rectangle{
     id: sensorroot
     anchors.right: parent.right
     anchors.top: parent.top
+    anchors.margins: 10
     color: "transparent"
     property alias visibleGraficiRoot: graficiroot.visible
     property alias maxDepth: ay.min
@@ -56,17 +57,15 @@ Rectangle{
 
     }
 
-    Rectangle{
+    Rectangle {
         id: graficiroot
         width:parent.width/2
         color: "transparent"
         radius:10
         anchors.right: sensorroot.right
         anchors.top: sensorroot.top
-        anchors.margins: 20
 
-
-        Rectangle{
+        Rectangle {
             id: titoli
             height: 30
             width:parent.width
@@ -75,14 +74,14 @@ Rectangle{
             anchors.left: parent.left
             color: Qt.rgba(32,32,32,0.3)
 
-            Rectangle{
+            Rectangle {
                 id:titoloPressione
                 height: parent.height
                 width: parent.width/3
                 anchors.right: parent.right
                 color: "transparent"
 
-                Text{
+                Text {
                     id:textPressione
                     text: "Altitudine"
                     color: "#dddddd"
@@ -234,10 +233,9 @@ Rectangle{
     Rectangle{
         id: puntuali
         radius: 5
-        anchors.right: parent.right
-        anchors.top:  parent.top
-        anchors.rightMargin: 40+titoli.width
-        anchors.topMargin: 10
+        anchors.left: sensorroot.left
+        anchors.top:  sensorroot.top
+        //anchors.rightMargin: 40+titoli.width
         width:(parent.width/2)-40
         height: titoli.height*2
         color: Qt.rgba(32,32,32,0.3)

@@ -10,6 +10,7 @@ import Qt3D.Render 2.0
 import Qt3D.Input 2.0
 import Qt3D.Extras 2.12
 import Qt3D.Render 2.14
+
 //Rectangle {
 //    id: cadRoot
 //    property alias visibleCadRoot: cadRoot.visible
@@ -28,8 +29,6 @@ import Qt3D.Render 2.14
 //        anchors.margins: 5
 
 //    }
-
-
 
 Entity {
     id: sceneRoot
@@ -92,9 +91,7 @@ Entity {
     SceneLoader
     {
         id: sceneLoader
-        source: "file:///home/fedeb/Developer/politocean/politocean_gui/ROV_COLORI.obj"
-
-
+        source: "assets/rov.obj"
     }
 
 
